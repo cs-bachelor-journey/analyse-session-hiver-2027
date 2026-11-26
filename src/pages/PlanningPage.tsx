@@ -1,8 +1,15 @@
-import { BookOpen, CalendarDays, GraduationCap, FolderGit2 } from 'lucide-react'
+import {
+  BookOpen,
+  CalendarDays,
+  FlaskConical,
+  FolderGit2,
+  GraduationCap,
+  TriangleAlert,
+} from 'lucide-react'
 
 import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import {
   Table,
   TableBody,
@@ -12,9 +19,18 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
+import { Callout } from '@/components/Callout'
 import { UnsplashImage } from '@/components/UnsplashImage'
-import { courses } from '@/data/courses'
-import { weekPlan, workTypes } from '@/data/planning'
+import { courseIcons } from '@/components/courseIcons'
+import { courses, getCourse } from '@/data/courses'
+import {
+  labSections,
+  scheduleConfirmations,
+  sessionCalendar,
+  weekPlan,
+  workTypes,
+} from '@/data/planning'
+import { Link } from 'react-router-dom'
 
 const workTypeIcons = {
   'University Learning': GraduationCap,
@@ -33,6 +49,108 @@ function formatHours(total: number): string {
   return m === 0 ? `${h} h` : `${h} h ${String(m).padStart(2, '0')}`
 }
 
+type CalendarDay = {
+  day: string
+  classes: (typeof sessionCalendar)[number]['classes']
+  dayNote?: string
+  activities: (typeof weekPlan)[number]['activities']
+}
+
+const calendarDays: CalendarDay[] = weekPlan.map((plan) => {
+  const sessionDay = sessionCalendar.find((session) => session.day === plan.day)
+  return {
+    day: plan.day,
+    classes: sessionDay?.classes ?? [],
+    dayNote: sessionDay?.dayNote,
+    activities: plan.activities,
+  }
+})
+
+function CalendarDayCard({ day }: { day: CalendarDay }) {
+  const personalTotal = day.activities.reduce((sum, activity) => sum + parseHours(activity.hours), 0)
+
+  return (
+    <Card className="flex flex-col">
+      <CardHeader className="pb-3">
+        <div className="flex items-center justify-between gap-2">
+          <CardTitle className="text-base">{day.day}</CardTitle>
+          <Badge variant="muted">≈ {formatHours(personalTotal)} de travail personnel</Badge>
+        </div>
+      </CardHeader>
+
+      <CardContent className="flex flex-1 flex-col gap-3">
+        {day.classes.length > 0 ? (
+          <div className="space-y-2">
+            {day.classes.map((entry) => {
+              const course = getCourse(entry.courseId)!
+              const Icon = courseIcons[entry.courseId]
+              return (
+                <div
+                  key={`${entry.courseId}-${entry.time}`}
+                  className="rounded-lg border border-border border-l-4 bg-card px-3 py-2"
+                  style={{ borderLeftColor: course.accent }}
+                >
+                  <div className="flex flex-wrap items-center gap-2">
+                    <span
+                      className="flex size-6 items-center justify-center rounded-md"
+                      style={{ backgroundColor: `${course.accent}1f`, color: course.accent }}
+                    >
+                      <Icon className="size-3.5" aria-hidden />
+                    </span>
+                    <span
+                      className="font-mono text-xs font-bold"
+                      style={{ color: course.accent }}
+                    >
+                      {course.code}
+                    </span>
+                    <span className="text-[11px] font-medium uppercase tracking-wide text-muted-foreground">
+                      {entry.kind}
+                    </span>
+                    <span className="ml-auto text-xs font-semibold whitespace-nowrap">
+                      {entry.time}
+                    </span>
+                  </div>
+                  {entry.note && (
+                    <p className="mt-1 text-xs leading-relaxed text-muted-foreground">{entry.note}</p>
+                  )}
+                </div>
+              )
+            })}
+          </div>
+        ) : (
+          <p className="rounded-lg border border-dashed border-border px-3 py-2 text-xs text-muted-foreground">
+            Aucune séance programmée ce jour-là.
+          </p>
+        )}
+
+        {day.dayNote && (
+          <p className="flex items-start gap-2 rounded-r-lg border border-border border-l-4 border-l-amber-500 bg-muted/60 p-2.5 text-xs leading-relaxed text-muted-foreground">
+            <TriangleAlert className="mt-0.5 size-3.5 shrink-0 text-amber-500" aria-hidden />
+            {day.dayNote}
+          </p>
+        )}
+
+        <div className="mt-auto">
+          <p className="mb-1.5 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+            Travail personnel suggéré
+          </p>
+          <div className="flex flex-wrap gap-1.5">
+            {day.activities.map((activity) => (
+              <span
+                key={activity.label}
+                className="inline-flex items-center gap-1.5 rounded-lg border border-border px-2.5 py-1.5 text-xs"
+              >
+                {activity.label}
+                <span className="font-semibold text-primary">{activity.hours}</span>
+              </span>
+            ))}
+          </div>
+        </div>
+      </CardContent>
+    </Card>
+  )
+}
+
 export function PlanningPage() {
   return (
     <>
@@ -46,12 +164,12 @@ export function PlanningPage() {
             Organisation
           </Badge>
           <h1 className="max-w-2xl font-display text-3xl font-extrabold tracking-tight sm:text-4xl">
-            Répartition hebdomadaire
+            Calendrier et répartition hebdomadaire
           </h1>
           <p className="mt-4 max-w-2xl text-lg text-muted-foreground">
-            Avec 45 heures théoriques par semaine, une organisation claire fait la différence.
-            Cette proposition concerne le travail personnel uniquement&nbsp;: les heures de cours
-            et de laboratoire sont déjà programmées dans la grille horaire.
+            Le calendrier officiel des cours de la session d&rsquo;hiver 2027, jour par jour, avec
+            pour chaque jour une proposition de travail personnel visant les 25 heures
+            hebdomadaires recommandées.
           </p>
         </div>
       </div>
@@ -100,60 +218,128 @@ export function PlanningPage() {
           </div>
         </section>
 
-        {/* ------------------------------------------------- Semaine type */}
-        <section aria-labelledby="semaine">
+        {/* ---------------------------------------- Calendrier de la session */}
+        <section aria-labelledby="calendrier">
           <h2
-            id="semaine"
+            id="calendrier"
             className="flex items-center gap-2.5 font-display text-xl font-bold tracking-tight sm:text-2xl"
           >
             <CalendarDays className="size-5 text-primary" aria-hidden />
-            Exemple de semaine type
+            Calendrier de la session — Hiver 2027
           </h2>
-          <p className="mt-3 max-w-2xl text-muted-foreground">
-            Sélectionner un jour pour voir les activités suggérées. C&rsquo;est un point de
-            départ, pas un horaire rigide&nbsp;: les échéances des travaux, les examens et les
-            laboratoires déterminent les priorités réelles de chaque semaine.
+          <p className="mt-3 max-w-3xl text-muted-foreground">
+            Ce choix de cinq cours est réalisable sur le plan des horaires, à condition de bien
+            choisir les modalités de participation et les sections de laboratoire. Un seul
+            chevauchement subsiste&nbsp;: 50 minutes le mardi entre GLO-2005 et GIF-1001,
+            potentiellement résolvable grâce à la formule comodale de GLO-2005 (séances
+            enregistrées, suivies en classe ou à distance). Chaque jour indique aussi le
+            travail personnel suggéré&nbsp;: c&rsquo;est un point de départ, pas un horaire
+            rigide&nbsp;: les échéances, les examens et les laboratoires déterminent les
+            priorités réelles de chaque semaine.
+          </p>
+          <p className="mt-2 text-xs text-muted-foreground">
+            Horaires officiels du 11 janvier au 23 avril 2027, sujets à modification par
+            l&rsquo;université — la page officielle de chaque cours reste la référence.
           </p>
 
-          <Card className="mt-6">
-            <CardContent className="p-6">
-              <Tabs defaultValue="Lundi">
-                <TabsList className="w-full justify-start overflow-x-auto">
-                  {weekPlan.map((day) => (
-                    <TabsTrigger key={day.day} value={day.day}>
-                      {day.day}
-                    </TabsTrigger>
-                  ))}
-                </TabsList>
+          <div className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+            {calendarDays.map((day) => (
+              <CalendarDayCard key={day.day} day={day} />
+            ))}
+          </div>
+        </section>
 
-                {weekPlan.map((day) => {
-                  const total = day.activities.reduce(
-                    (sum, activity) => sum + parseHours(activity.hours),
-                    0,
-                  )
-                  return (
-                    <TabsContent key={day.day} value={day.day} className="mt-4">
-                      <div className="flex flex-wrap items-center gap-2">
-                        <span className="font-display text-lg font-bold">{day.day}</span>
-                        <Badge variant="muted">≈ {formatHours(total)} de travail personnel</Badge>
-                      </div>
-                      <div className="mt-3 flex flex-wrap gap-2">
-                        {day.activities.map((activity) => (
-                          <span
-                            key={activity.label}
-                            className="inline-flex items-center gap-2 rounded-lg border border-border bg-card px-3.5 py-2 text-sm"
-                          >
-                            {activity.label}
-                            <span className="font-semibold text-primary">{activity.hours}</span>
-                          </span>
-                        ))}
-                      </div>
-                    </TabsContent>
-                  )
-                })}
-              </Tabs>
-            </CardContent>
-          </Card>
+        {/* ---------------------------------------- Laboratoire GIF-1003 */}
+        <section aria-labelledby="laboratoire">
+          <h2
+            id="laboratoire"
+            className="flex items-center gap-2.5 font-display text-xl font-bold tracking-tight sm:text-2xl"
+          >
+            <FlaskConical className="size-5 text-primary" aria-hidden />
+            Choix du laboratoire GIF-1003 (vendredi)
+          </h2>
+          <p className="mt-3 max-w-2xl text-muted-foreground">
+            Le cours GIF-1003 comporte une section liée obligatoire le vendredi, pour les
+            travaux pratiques. Quatre plages horaires sont offertes&nbsp;:
+          </p>
+
+          <div className="mt-4 max-w-lg">
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead>Section</TableHead>
+                  <TableHead>Horaire du vendredi</TableHead>
+                  <TableHead>Recommandation</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {labSections.map((lab) => (
+                  <TableRow key={lab.section}>
+                    <TableCell className="font-semibold">{lab.section}</TableCell>
+                    <TableCell>{lab.time}</TableCell>
+                    <TableCell>
+                      {lab.recommended ? (
+                        <Badge>Recommandée</Badge>
+                      ) : (
+                        <span className="text-sm text-muted-foreground">Compatible</span>
+                      )}
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </div>
+
+          <div className="mt-6 max-w-2xl">
+            <Callout title="Choix conseillé">
+              Privilégier la section B ou C&nbsp;: elle laisse le vendredi matin libre tout en
+              restant pleinement compatible avec les quatre autres cours. Les quatre sections
+              restent toutefois compatibles avec le reste de l&rsquo;horaire — le choix peut
+              donc aussi dépendre des préférences personnelles (matin ou après-midi).
+            </Callout>
+          </div>
+        </section>
+
+        {/* ---------------------------------------- Points à confirmer */}
+        <section aria-labelledby="confirmations">
+          <h2
+            id="confirmations"
+            className="flex items-center gap-2.5 font-display text-xl font-bold tracking-tight sm:text-2xl"
+          >
+            <TriangleAlert className="size-5 text-amber-500" aria-hidden />
+            Points à confirmer avant de finaliser l&rsquo;inscription
+          </h2>
+          <p className="mt-3 max-w-2xl text-muted-foreground">
+            Avant de finaliser l&rsquo;inscription, il reste à obtenir une confirmation de la
+            gestion des études sur les points suivants&nbsp;:
+          </p>
+          <div className="mt-4 grid gap-3 md:grid-cols-3">
+            {scheduleConfirmations.map((question, index) => (
+              <div
+                key={question}
+                className="flex items-start gap-3 rounded-xl border border-border bg-card p-4"
+              >
+                <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-amber-500/15 text-xs font-bold text-amber-600 dark:text-amber-400">
+                  {index + 1}
+                </span>
+                <p className="text-sm leading-relaxed">{question}</p>
+              </div>
+            ))}
+          </div>
+          <div className="mt-6 max-w-2xl">
+            <Callout title="Verdict">
+              Aucun des cinq cours ne doit être abandonné pour le moment. Le seul problème
+              identifié est le chevauchement du mardi, qui pourrait être résolu grâce à la
+              formule comodale de GLO-2005 — d&rsquo;où l&rsquo;importance des confirmations
+              ci-dessus. Il reste aussi à choisir la section de laboratoire de GIF-1003 et à
+              vérifier les horaires d&rsquo;examens.
+            </Callout>
+          </div>
+          <div className="mt-4">
+            <Button asChild variant="outline">
+              <Link to="/cours">Voir les pages officielles de chaque cours</Link>
+            </Button>
+          </div>
         </section>
 
         {/* ---------------------------------------------- Types de travail */}
