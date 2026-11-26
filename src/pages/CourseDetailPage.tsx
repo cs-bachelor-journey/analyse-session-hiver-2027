@@ -3,13 +3,19 @@ import {
   ArrowLeft,
   ArrowRight,
   BookOpen,
+  CalendarDays,
   CheckCircle2,
   Clock,
   Hammer,
+  Info,
   Library,
   ListChecks,
   Star,
   Target,
+  TriangleAlert,
+  User,
+  MonitorSmartphone,
+  GraduationCap,
 } from 'lucide-react'
 
 import { Badge } from '@/components/ui/badge'
@@ -106,10 +112,71 @@ export function CourseDetailPage() {
       </div>
 
       <div className="mx-auto max-w-4xl space-y-14 px-4 py-12 sm:px-6 sm:py-16">
-        {/* -------------------------------------------------------- Présentation */}
+        {/* ------------------------------------------------ Présentation */}
         <section>
           <SectionTitle icon={BookOpen}>Présentation</SectionTitle>
           <p className="mt-4 text-lg leading-relaxed text-muted-foreground">{course.intro}</p>
+        </section>
+
+        {/* ------------------------------------ Informations officielles */}
+        <section>
+          <SectionTitle icon={Info}>Informations officielles — Hiver 2027</SectionTitle>
+          <div className="mt-4">
+            <Card>
+              <CardContent className="grid gap-4 p-6 sm:grid-cols-2">
+                <div className="flex items-start gap-3">
+                  <MonitorSmartphone className="mt-0.5 size-5 shrink-0 text-primary" aria-hidden />
+                  <div>
+                    <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                      Mode d&rsquo;enseignement
+                    </p>
+                    <p className="mt-0.5 text-sm font-medium">{course.mode}</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <User className="mt-0.5 size-5 shrink-0 text-primary" aria-hidden />
+                  <div>
+                    <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                      Enseignant
+                    </p>
+                    <p className="mt-0.5 text-sm font-medium">{course.teacher}</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <CalendarDays className="mt-0.5 size-5 shrink-0 text-primary" aria-hidden />
+                  <div>
+                    <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                      Horaire
+                    </p>
+                    <p className="mt-0.5 text-sm font-medium">{course.schedule}</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <GraduationCap className="mt-0.5 size-5 shrink-0 text-primary" aria-hidden />
+                  <div>
+                    <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                      Préalables
+                    </p>
+                    <p className="mt-0.5 text-sm font-medium">{course.prerequisites}</p>
+                    {course.prerequisitesNote && (
+                      <p className="text-xs text-muted-foreground">{course.prerequisitesNote}</p>
+                    )}
+                  </div>
+                </div>
+                <div className="sm:col-span-2">
+                  <ExternalLink href={course.officialUrl} className="text-sm">
+                    Page officielle du cours (ulaval.ca)
+                  </ExternalLink>
+                </div>
+              </CardContent>
+            </Card>
+            {course.scheduleNote && (
+              <p className="mt-3 flex items-start gap-2 rounded-r-lg border border-border border-l-4 border-l-amber-500 bg-muted/60 p-3 text-sm text-muted-foreground">
+                <TriangleAlert className="mt-0.5 size-4 shrink-0 text-amber-500" aria-hidden />
+                {course.scheduleNote}
+              </p>
+            )}
+          </div>
         </section>
 
         {/* ------------------------------------------------------------- Thèmes */}
@@ -201,7 +268,7 @@ export function CourseDetailPage() {
           )}
           <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {course.projects.map((project) => (
-              <Card key={project.name}>
+              <Card key={project.name} className="flex flex-col">
                 <CardHeader className="pb-2">
                   <CardTitle className="text-sm" style={{ color: course.accent }}>
                     {project.name}
@@ -212,7 +279,7 @@ export function CourseDetailPage() {
                     </CardDescription>
                   )}
                 </CardHeader>
-                <CardContent>
+                <CardContent className="flex flex-1 flex-col">
                   <ul className="space-y-1.5 text-sm text-muted-foreground">
                     {project.points.map((point) => (
                       <li key={point} className="flex items-start gap-2">
@@ -225,6 +292,12 @@ export function CourseDetailPage() {
                       </li>
                     ))}
                   </ul>
+                  {project.example && (
+                    <div className="mt-auto border-t border-border pt-3 text-xs leading-relaxed">
+                      <span className="mr-1 font-medium text-muted-foreground">Exemple&nbsp;:</span>
+                      <ExternalLink href={project.example.url}>{project.example.label}</ExternalLink>
+                    </div>
+                  )}
                 </CardContent>
               </Card>
             ))}

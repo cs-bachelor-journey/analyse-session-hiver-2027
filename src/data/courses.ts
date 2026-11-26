@@ -11,10 +11,16 @@ export type Resource = {
   paid?: boolean
 }
 
+export type ProjectExample = {
+  label: string
+  url: string
+}
+
 export type Project = {
   name: string
   level?: string
   points: string[]
+  example?: ProjectExample
 }
 
 export type Theme = {
@@ -38,6 +44,13 @@ export type Course = {
   image: string
   summary: string
   intro: string
+  officialUrl: string
+  prerequisites: string
+  prerequisitesNote?: string
+  mode: string
+  teacher: string
+  schedule: string
+  scheduleNote?: string
   themes: Theme[]
   themesNote?: string
   skills: string[]
@@ -59,6 +72,11 @@ export const courses: Course[] = [
     summary: 'Programmation orientée objet, gestion de la mémoire et bibliothèque standard en C++.',
     intro:
       "Ce cours va au-delà de la programmation procédurale : il apprend à concevoir des programmes organisés autour d'objets, de classes et de responsabilités clairement définies. C'est le pilier « génie logiciel » de la session.",
+    officialUrl: 'https://ulaval.ca/etudes/cours/gif-1003-programmation-avancee-en-c-pour-lingenierie',
+    prerequisites: 'IFT-1004 OU GLO-1901',
+    mode: 'En classe',
+    teacher: 'Thierry Eude',
+    schedule: 'Mercredi 9h30–12h20 · laboratoire le vendredi (section liée au choix)',
     themes: [
       { theme: 'Syntaxe et sémantique', description: 'Fonctionnement du langage C++' },
       { theme: 'Encapsulation', description: 'Protéger et organiser les données' },
@@ -110,6 +128,11 @@ export const courses: Course[] = [
         ],
       },
       {
+        name: 'cplusplus.com',
+        description: 'Tutoriel C++ classique, du langage de base jusqu\u2019aux classes, l\u2019héritage et la STL.',
+        links: [{ label: 'Tutoriel C++', url: 'http://www.cplusplus.com/doc/tutorial/' }],
+      },
+      {
         name: 'Exercism – C++',
         description: "Exercices pratiques avec mentorat pour progresser en C++ et en raisonnement objet.",
         links: [{ label: 'Exercism C++', url: 'https://exercism.org/tracks/cpp' }],
@@ -125,6 +148,10 @@ export const courses: Course[] = [
           'Emprunt et retour de livres.',
           'Stockage dans des fichiers.',
         ],
+        example: {
+          label: 'Dépôts GitHub — library management',
+          url: 'https://github.com/topics/library-management-system',
+        },
       },
       {
         name: 'Banking System',
@@ -134,6 +161,10 @@ export const courses: Course[] = [
           'Gestion des exceptions.',
           'Historique des transactions.',
         ],
+        example: {
+          label: 'Dépôts GitHub — systèmes bancaires',
+          url: 'https://github.com/topics/banking-system',
+        },
       },
       {
         name: 'Inventory Management System',
@@ -143,6 +174,10 @@ export const courses: Course[] = [
           'Recherche et tri.',
           "Import/export de données.",
         ],
+        example: {
+          label: 'Stock-Manager (GitHub)',
+          url: 'https://github.com/MedAziz218/Stock-Manager',
+        },
       },
       {
         name: 'Chess Engine — version simplifiée',
@@ -152,6 +187,10 @@ export const courses: Course[] = [
           'Polymorphisme.',
           'Validation des mouvements.',
         ],
+        example: {
+          label: 'Dépôts GitHub — moteurs d\u2019échecs (Stockfish, Sunfish…)',
+          url: 'https://github.com/topics/chess-engine',
+        },
       },
       {
         name: 'Particle Simulation Engine',
@@ -161,6 +200,10 @@ export const courses: Course[] = [
           'Allocation et durée de vie des objets.',
           'Simulation et affichage.',
         ],
+        example: {
+          label: 'Dépôts GitHub — simulations de fluides',
+          url: 'https://github.com/topics/fluid-simulation',
+        },
       },
     ],
     advice:
@@ -177,6 +220,13 @@ export const courses: Course[] = [
     summary: 'Conception, interrogation et sécurisation de bases de données relationnelles.',
     intro:
       "Ce cours ne se limite pas à l'écriture de requêtes SQL : il couvre la conception, la structuration, l'interrogation et la sécurisation d'une base de données — des compétences directement valorisables en entreprise.",
+    officialUrl: 'https://ulaval.ca/etudes/cours/glo-2005-modeles-et-langages-des-bases-de-donnees-pour-lingenierie',
+    prerequisites: 'IFT-1004 OU GLO-1901',
+    mode: 'Comodal',
+    teacher: 'Richard Khoury',
+    schedule: 'Mardi 12h30–15h20 (en classe ou à distance) · laboratoire mercredi 13h30–15h20',
+    scheduleNote:
+      'La plage du mardi chevauche celle du cours GIF-1001 : ce choix d\u2019horaire est à confirmer lors de l\u2019inscription.',
     themes: [
       { theme: 'Modèle relationnel', description: 'Tables, lignes, colonnes' },
       { theme: 'SQL', description: 'Création et manipulation des données' },
@@ -194,7 +244,7 @@ export const courses: Course[] = [
       'Concevoir un modèle conceptuel de données.',
       'Transformer un modèle en schéma relationnel.',
       'Écrire des requêtes SQL complexes.',
-      'Comprendre les jointures et sous-requêtes.',
+      "Comprendre les jointures et sous-requêtes.",
       'Normaliser une base de données.',
       'Analyser les performances des requêtes.',
       'Comprendre les transactions et contraintes.',
@@ -249,6 +299,10 @@ export const courses: Course[] = [
           'Contraintes et clés étrangères.',
           'Requêtes et vues SQL.',
         ],
+        example: {
+          label: 'Recherche GitHub — schémas de bibliothèque',
+          url: 'https://github.com/search?q=library+database+schema&type=repositories',
+        },
       },
       {
         name: 'E-commerce Database',
@@ -258,6 +312,10 @@ export const courses: Course[] = [
           'Normalisation.',
           'Transactions et contraintes.',
         ],
+        example: {
+          label: 'Chinook — base de données d\u2019exemple complète (magasin multimédia)',
+          url: 'https://github.com/lerocha/chinook-database',
+        },
       },
       {
         name: 'University Management Database',
@@ -267,6 +325,10 @@ export const courses: Course[] = [
           'Notes et évaluations.',
           'Requêtes analytiques.',
         ],
+        example: {
+          label: 'Recherche GitHub — schémas d\u2019université',
+          url: 'https://github.com/search?q=university+database+schema&type=repositories',
+        },
       },
       {
         name: 'SQL Performance Lab',
@@ -276,6 +338,10 @@ export const courses: Course[] = [
           'Tester les index.',
           'Étudier EXPLAIN ANALYZE.',
         ],
+        example: {
+          label: 'pgbench — outil officiel de benchmark PostgreSQL',
+          url: 'https://www.postgresql.org/docs/current/pgbench.html',
+        },
       },
       {
         name: 'Mini Data Warehouse',
@@ -285,6 +351,10 @@ export const courses: Course[] = [
           'Agrégations.',
           'Rapports analytiques.',
         ],
+        example: {
+          label: 'Projet complet de data warehouse en étoile (GitHub)',
+          url: 'https://github.com/DataWithBaraa/sql-data-warehouse-project',
+        },
       },
     ],
     advice:
@@ -301,6 +371,11 @@ export const courses: Course[] = [
     summary: 'Logique formelle, quantificateurs et techniques de démonstration.',
     intro:
       "C'est probablement le cours qui demande le plus de régularité dans les révisions. Son objectif : apprendre à raisonner rigoureusement et à démontrer qu'une affirmation est vraie — une compétence transversale utile dans tous les autres cours, notamment en informatique théorique.",
+    officialUrl: 'https://ulaval.ca/etudes/cours/ift-1000-logique-et-techniques-de-preuve',
+    prerequisites: 'MAT-1310 OU MAT-1919',
+    mode: 'À distance (synchrone)',
+    teacher: 'Loïc Ricaud',
+    schedule: 'Lundi 16h30–17h50 · mercredi 15h30–16h50 (classes virtuelles synchrones)',
     themes: [
       { theme: 'Égalité', description: 'Substitution et règle de Leibniz' },
       { theme: 'Logique propositionnelle', description: 'ET, OU, NON, implication' },
@@ -339,6 +414,12 @@ export const courses: Course[] = [
         links: [{ label: 'forall x: Calgary', url: 'https://forallx.openlogicproject.org/' }],
       },
       {
+        name: 'forall x: York — Robert Trueman',
+        description:
+          'Autre version libre du manuel forallx (PDF + livret de solutions), pour varier les exercices.',
+        links: [{ label: 'Télécharger forallx: York', url: 'https://www.rtrueman.com/forallx/' }],
+      },
+      {
         name: 'Carnap',
         description: 'Exercices interactifs de logique formelle et de démonstrations.',
         links: [{ label: 'Carnap', url: 'https://carnap.io/' }],
@@ -371,6 +452,10 @@ export const courses: Course[] = [
           'Détecter les tautologies.',
           'Vérifier les équivalences.',
         ],
+        example: {
+          label: 'Générateur de tables de vérité (Stanford CS103)',
+          url: 'https://web.stanford.edu/class/cs103/tools/truth-table-tool/',
+        },
       },
       {
         name: 'Logic Proof Assistant',
@@ -380,6 +465,10 @@ export const courses: Course[] = [
           'Afficher les étapes.',
           'Détecter les erreurs logiques.',
         ],
+        example: {
+          label: 'fitch-checker — vérificateur de preuves (Open Logic)',
+          url: 'https://github.com/OpenLogicProject/fitch-checker',
+        },
       },
       {
         name: 'Mathematical Induction Visualizer',
@@ -389,6 +478,10 @@ export const courses: Course[] = [
           'Illustrer le passage de n à n+1.',
           'Tester des propriétés simples.',
         ],
+        example: {
+          label: 'Article Wikipédia — raisonnement par récurrence',
+          url: 'https://en.wikipedia.org/wiki/Mathematical_induction',
+        },
       },
       {
         name: 'Set Theory Visualizer',
@@ -398,6 +491,10 @@ export const courses: Course[] = [
           'Inclusion et égalité.',
           'Diagrammes de Venn.',
         ],
+        example: {
+          label: 'Article Wikipédia — diagrammes de Venn',
+          url: 'https://en.wikipedia.org/wiki/Venn_diagram',
+        },
       },
       {
         name: 'Boolean Expression Simplifier',
@@ -407,6 +504,10 @@ export const courses: Course[] = [
           'Simplifier les expressions.',
           'Comparer avant et après.',
         ],
+        example: {
+          label: 'boolean-algebra.com — simplificateur avec étapes détaillées',
+          url: 'https://www.boolean-algebra.com/',
+        },
       },
     ],
     advice:
@@ -423,6 +524,11 @@ export const courses: Course[] = [
     summary: 'Automates, grammaires, machines de Turing et décidabilité.',
     intro:
       "Un cours clé pour comprendre ce qui se cache derrière les langages de programmation, les expressions régulières et les machines abstraites. Différentes catégories de machines y sont étudiées, ainsi que les langages qu'elles peuvent reconnaître — les fondements mêmes de ce qu'un ordinateur peut ou ne peut pas calculer.",
+    officialUrl: 'https://ulaval.ca/etudes/cours/ift-2002-informatique-theorique',
+    prerequisites: 'MAT-1310 OU MAT-1919',
+    mode: 'En classe',
+    teacher: 'Pascal Tesson',
+    schedule: 'Jeudi 15h30–18h20',
     themes: [
       { theme: 'Langages formels', description: "Définir des ensembles de chaînes" },
       { theme: 'Automates finis', description: 'Machines à états finis' },
@@ -498,6 +604,10 @@ export const courses: Course[] = [
           'Simuler une chaîne.',
           "Déterminer l'acceptation ou le rejet.",
         ],
+        example: {
+          label: 'Qfsm — outil graphique de machines à états',
+          url: 'https://qfsm.sourceforge.io/',
+        },
       },
       {
         name: 'Regex to Automata Converter',
@@ -507,6 +617,10 @@ export const courses: Course[] = [
           'Convertir en DFA.',
           'Tester des chaînes.',
         ],
+        example: {
+          label: 'Regexper — visualiseur d\u2019expressions régulières',
+          url: 'https://regexper.com/',
+        },
       },
       {
         name: 'Pushdown Automata Simulator',
@@ -516,6 +630,10 @@ export const courses: Course[] = [
           'Reconnaître les parenthèses équilibrées.',
           'Tracer les configurations.',
         ],
+        example: {
+          label: 'automata (Python) — automates finis, à pile et machines de Turing',
+          url: 'https://github.com/caleb531/automata',
+        },
       },
       {
         name: 'Grammar Parser and Visualizer',
@@ -525,6 +643,10 @@ export const courses: Course[] = [
           'Construire des arbres syntaxiques.',
           'Détecter les chaînes invalides.',
         ],
+        example: {
+          label: 'Crafting Interpreters — livre + code source complet (GitHub)',
+          url: 'https://github.com/munificent/craftinginterpreters',
+        },
       },
       {
         name: 'Turing Machine Simulator',
@@ -534,6 +656,10 @@ export const courses: Course[] = [
           'Exécution étape par étape.',
           'Historique des configurations.',
         ],
+        example: {
+          label: 'Turing Machine Simulator — utilisé par plusieurs universités',
+          url: 'https://turingmachinesimulator.com/',
+        },
       },
     ],
     advice:
@@ -550,6 +676,14 @@ export const courses: Course[] = [
     summary: 'Architecture des ordinateurs, assembleur ARM et programmation bas niveau.',
     intro:
       "Ce cours descend d'un niveau par rapport à la programmation habituelle : il explique comment un ordinateur exécute réellement les instructions, comment les données circulent et comment le processeur interagit avec la mémoire et les périphériques. L'architecture ARM sert d'étude de cas et le langage d'assemblage occupe une place importante.",
+    officialUrl: 'https://ulaval.ca/etudes/cours/gif-1001-ordinateurs-structure-et-applications',
+    prerequisites: 'IFT-1004 OU GLO-1901',
+    prerequisitesNote: 'Préalable pouvant être suivi simultanément.',
+    mode: 'Comodal',
+    teacher: 'Ming Zeng',
+    schedule: 'Mardi 14h30–16h20 (en classe ou à distance)',
+    scheduleNote:
+      'La plage du mardi chevauche celle du cours GLO-2005 : ce choix d\u2019horaire est à confirmer lors de l\u2019inscription.',
     themes: [
       { theme: 'Architecture ordinateur', description: 'Organisation générale' },
       { theme: 'Processeur', description: 'CPU et ses composants' },
@@ -628,6 +762,10 @@ export const courses: Course[] = [
           'Opérations binaires.',
           'Représentation en complément à deux.',
         ],
+        example: {
+          label: 'Bases numériques — cplusplus.com',
+          url: 'http://www.cplusplus.com/doc/hex/',
+        },
       },
       {
         name: 'ARM Assembly Playground',
@@ -637,6 +775,10 @@ export const courses: Course[] = [
           'Exécuter les instructions.',
           'Visualiser les changements d\u2019état.',
         ],
+        example: {
+          label: 'Compiler Explorer — code C traduit en assembleur ARM64',
+          url: 'https://godbolt.org/',
+        },
       },
       {
         name: 'CPU Instruction Simulator',
@@ -646,6 +788,10 @@ export const courses: Course[] = [
           'Compteur ordinal.',
           'Visualisation des cycles.',
         ],
+        example: {
+          label: 'Raven-RiscV — simulateur CPU avec débogueur pas-à-pas',
+          url: 'https://github.com/Gaok1/Raven-RiscV',
+        },
       },
       {
         name: 'Cache Memory Simulator',
@@ -655,6 +801,10 @@ export const courses: Course[] = [
           'Politiques de remplacement.',
           'Comparaison des performances.',
         ],
+        example: {
+          label: 'Dépôts GitHub — simulateurs de cache',
+          url: 'https://github.com/topics/cache-simulator',
+        },
       },
       {
         name: 'Mini ALU Simulator',
@@ -664,6 +814,10 @@ export const courses: Course[] = [
           'Opérations binaires.',
           'Drapeaux de résultat.',
         ],
+        example: {
+          label: 'NandGame — construire un ordinateur à partir de portes NAND',
+          url: 'https://nandgame.com/',
+        },
       },
     ],
     advice:

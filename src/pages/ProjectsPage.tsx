@@ -14,6 +14,7 @@ import {
   TableRow,
 } from '@/components/ui/table'
 import { Callout } from '@/components/Callout'
+import { ExternalLink } from '@/components/ExternalLink'
 import { UnsplashImage } from '@/components/UnsplashImage'
 import { courseIcons } from '@/components/courseIcons'
 import { courses } from '@/data/courses'
@@ -134,6 +135,16 @@ export function ProjectsPage() {
                                   </li>
                                 ))}
                               </ul>
+                              {project.example && (
+                                <div className="mt-3 border-t border-border pt-3 text-xs leading-relaxed">
+                                  <span className="mr-1 font-medium text-muted-foreground">
+                                    Exemple&nbsp;:
+                                  </span>
+                                  <ExternalLink href={project.example.url}>
+                                    {project.example.label}
+                                  </ExternalLink>
+                                </div>
+                              )}
                             </div>
                           ))}
                         </div>
