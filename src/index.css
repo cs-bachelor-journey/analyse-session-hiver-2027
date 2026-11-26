@@ -89,3 +89,27 @@
     scroll-behavior: auto;
   }
 }
+
+/* --- FullCalendar (calendrier de session) ---
+   v7 utilise des classes hachées : le thème se pilote par variables CSS. */
+.session-calendar {
+  --fc-classic-primary: var(--primary);
+  --fc-classic-primary-foreground: var(--primary-foreground);
+  --fc-classic-event: var(--primary);
+  --fc-classic-event-contrast: var(--primary-foreground);
+  --fc-classic-button: var(--primary);
+  --fc-classic-button-border: var(--primary);
+  --fc-classic-button-strong: color-mix(in srgb, var(--primary) 80%, black);
+  --fc-classic-button-strong-border: color-mix(in srgb, var(--primary) 80%, black);
+  --fc-classic-button-foreground: var(--primary-foreground);
+  --fc-classic-today: color-mix(in srgb, var(--primary) 10%, transparent);
+  --fc-classic-highlight: color-mix(in srgb, var(--primary) 16%, transparent);
+  --fc-classic-background: var(--card);
+  --fc-classic-foreground: var(--foreground);
+  --fc-classic-muted-foreground: var(--muted-foreground);
+  --fc-classic-border: var(--border);
+  --fc-classic-faint: color-mix(in srgb, var(--foreground) 4%, transparent);
+  --fc-classic-muted: color-mix(in srgb, var(--foreground) 8%, transparent);
+  --fc-classic-strong: color-mix(in srgb, var(--foreground) 14%, transparent);
+  font-size: 0.85rem;
+}

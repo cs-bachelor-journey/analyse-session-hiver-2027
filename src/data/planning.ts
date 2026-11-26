@@ -1,6 +1,8 @@
 export type Activity = {
   label: string
   hours: string
+  /** Plage suggérée dans la journée (ex. de « 10:00 » à « 12:00 »). */
+  slot: { start: string; end: string }
 }
 
 export type DayPlan = {
@@ -98,57 +100,79 @@ export const scheduleConfirmations: string[] = [
   "Vérifier les horaires des examens sous surveillance, particulièrement ceux des cours à distance et comodaux : aucun accommodement n'est accordé en cas de conflit.",
 ]
 
+/** Dates officielles de la session, tirées du calendrier universitaire 2026-2027 de l'Université Laval. */
+export const sessionInfo = {
+  start: '2027-01-11',
+  end: '2027-04-23',
+  lectureWeek: { start: '2027-03-01', end: '2027-03-05' },
+  easter: [
+    { date: '2027-03-26' },
+    { date: '2027-03-29' },
+  ],
+  examsPeriod: { start: '2027-04-26', end: '2027-05-02' },
+  importantDates: [
+    { date: '2027-01-11', label: 'Début de la session d\u2019hiver 2027' },
+    { date: '2027-01-25', label: 'Date limite — abandon de cours avec remboursement' },
+    { date: '2027-02-15', label: 'Date limite — paiement de tout solde des droits de scolarité' },
+    { date: '2027-03-01', label: 'Semaine de lecture (1er au 5 mars)' },
+    { date: '2027-03-22', label: 'Date limite — abandon de cours sans mention d\u2019échec' },
+    { date: '2027-03-26', label: 'Congé de Pâques (26 au 29 mars)' },
+    { date: '2027-04-23', label: 'Fin de la session d\u2019hiver 2027' },
+    { date: '2027-04-26', label: 'Période d\u2019examens (26 avril au 2 mai)' },
+  ],
+}
+
 export const weekPlan: DayPlan[] = [
   {
     day: 'Lundi',
     activities: [
-      { label: 'IFT-1000 — exercices de logique', hours: '2 h' },
-      { label: 'GIF-1003 — pratique C++', hours: '1 h' },
-      { label: 'Révision de la semaine précédente', hours: '1 h' },
+      { label: 'IFT-1000 — exercices de logique', hours: '2 h', slot: { start: '10:00', end: '12:00' } },
+      { label: 'GIF-1003 — pratique C++', hours: '1 h', slot: { start: '13:00', end: '14:00' } },
+      { label: 'Révision de la semaine précédente', hours: '1 h', slot: { start: '15:00', end: '16:00' } },
     ],
   },
   {
     day: 'Mardi',
     activities: [
-      { label: 'GLO-2005 — requêtes SQL', hours: '2 h' },
-      { label: 'GIF-1001 — assembleur et binaire', hours: '1 h' },
+      { label: 'GLO-2005 — requêtes SQL', hours: '2 h', slot: { start: '18:00', end: '20:00' } },
+      { label: 'GIF-1001 — assembleur et binaire', hours: '1 h', slot: { start: '20:00', end: '21:00' } },
     ],
   },
   {
     day: 'Mercredi',
     activities: [
-      { label: 'IFT-2002 — automates et exercices', hours: '2 h' },
-      { label: 'GIF-1003 — lecture et exercices', hours: '1 h' },
-      { label: 'Révision ciblée', hours: '1 h' },
+      { label: 'IFT-2002 — automates et exercices', hours: '2 h', slot: { start: '18:00', end: '20:00' } },
+      { label: 'GIF-1003 — lecture et exercices', hours: '1 h', slot: { start: '20:00', end: '21:00' } },
+      { label: 'Révision ciblée', hours: '1 h', slot: { start: '21:00', end: '22:00' } },
     ],
   },
   {
     day: 'Jeudi',
     activities: [
-      { label: 'GLO-2005 — conception et normalisation', hours: '2 h' },
-      { label: 'IFT-1000 — démonstrations', hours: '1 h' },
+      { label: 'GLO-2005 — conception et normalisation', hours: '2 h', slot: { start: '10:00', end: '12:00' } },
+      { label: 'IFT-1000 — démonstrations', hours: '1 h', slot: { start: '13:00', end: '14:00' } },
     ],
   },
   {
     day: 'Vendredi',
     activities: [
-      { label: 'GIF-1003 — travaux et laboratoire', hours: '1 h 30' },
-      { label: 'GIF-1001 — travaux et laboratoire', hours: '1 h 30' },
-      { label: 'Révision du week-end à venir', hours: '1 h' },
+      { label: 'GIF-1003 — travaux et laboratoire', hours: '1 h 30', slot: { start: '16:00', end: '17:30' } },
+      { label: 'GIF-1001 — travaux et laboratoire', hours: '1 h 30', slot: { start: '18:00', end: '19:30' } },
+      { label: 'Révision du week-end à venir', hours: '1 h', slot: { start: '20:00', end: '21:00' } },
     ],
   },
   {
     day: 'Samedi',
     activities: [
-      { label: 'Projet personnel (cours au choix)', hours: '3 h' },
-      { label: 'Révisions et exercices difficiles', hours: '2 h' },
+      { label: 'Projet personnel (cours au choix)', hours: '3 h', slot: { start: '10:00', end: '13:00' } },
+      { label: 'Révisions et exercices difficiles', hours: '2 h', slot: { start: '14:00', end: '16:00' } },
     ],
   },
   {
     day: 'Dimanche',
     activities: [
-      { label: 'Projet personnel (suite)', hours: '2 h' },
-      { label: 'Rattrapage et préparation de la semaine', hours: '1 h' },
+      { label: 'Projet personnel (suite)', hours: '2 h', slot: { start: '10:00', end: '12:00' } },
+      { label: 'Rattrapage et préparation de la semaine', hours: '1 h', slot: { start: '13:00', end: '14:00' } },
     ],
   },
 ]

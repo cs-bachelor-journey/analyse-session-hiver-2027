@@ -19,7 +19,10 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
+import { Link } from 'react-router-dom'
+
 import { Callout } from '@/components/Callout'
+import { SessionCalendar } from '@/components/SessionCalendar'
 import { UnsplashImage } from '@/components/UnsplashImage'
 import { courseIcons } from '@/components/courseIcons'
 import { courses, getCourse } from '@/data/courses'
@@ -30,7 +33,6 @@ import {
   weekPlan,
   workTypes,
 } from '@/data/planning'
-import { Link } from 'react-router-dom'
 
 const workTypeIcons = {
   'University Learning': GraduationCap,
@@ -140,6 +142,9 @@ function CalendarDayCard({ day }: { day: CalendarDay }) {
                 key={activity.label}
                 className="inline-flex items-center gap-1.5 rounded-lg border border-border px-2.5 py-1.5 text-xs"
               >
+                <span className="text-muted-foreground">
+                  {activity.slot.start} – {activity.slot.end}
+                </span>
                 {activity.label}
                 <span className="font-semibold text-primary">{activity.hours}</span>
               </span>
@@ -175,6 +180,26 @@ export function PlanningPage() {
       </div>
 
       <div className="mx-auto max-w-6xl space-y-14 px-4 py-12 sm:px-6 sm:py-16">
+        {/* ---------------------------------------- Calendrier interactif */}
+        <section aria-labelledby="calendrier">
+          <h2
+            id="calendrier"
+            className="flex items-center gap-2.5 font-display text-xl font-bold tracking-tight sm:text-2xl"
+          >
+            <CalendarDays className="size-5 text-primary" aria-hidden />
+            Calendrier de la session — Hiver 2027
+          </h2>
+          <p className="mt-3 max-w-3xl text-muted-foreground">
+            Toute la session du 11 janvier au 23 avril 2027, navigable mois par mois&nbsp;:
+            séances de cours, laboratoires, plages suggérées de travail personnel, semaine de
+            lecture (1er au 5 mars), congé de Pâques (26 au 29 mars), dates limites
+            administratives et période d&rsquo;examens (26 avril au 2 mai).
+          </p>
+          <div className="mt-6">
+            <SessionCalendar />
+          </div>
+        </section>
+
         {/* ------------------------------------------------------- Grille horaire */}
         <section aria-labelledby="grille">
           <h2
@@ -219,13 +244,13 @@ export function PlanningPage() {
         </section>
 
         {/* ---------------------------------------- Calendrier de la session */}
-        <section aria-labelledby="calendrier">
+        <section aria-labelledby="emploi-du-temps">
           <h2
-            id="calendrier"
+            id="emploi-du-temps"
             className="flex items-center gap-2.5 font-display text-xl font-bold tracking-tight sm:text-2xl"
           >
             <CalendarDays className="size-5 text-primary" aria-hidden />
-            Calendrier de la session — Hiver 2027
+            Emploi du temps hebdomadaire — cours et travail personnel
           </h2>
           <p className="mt-3 max-w-3xl text-muted-foreground">
             Ce choix de cinq cours est réalisable sur le plan des horaires, à condition de bien
