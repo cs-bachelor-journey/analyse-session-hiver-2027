@@ -149,8 +149,8 @@ export const courses: Course[] = [
           'Stockage dans des fichiers.',
         ],
         example: {
-          label: 'Dépôts GitHub — library management',
-          url: 'https://github.com/topics/library-management-system',
+          label: 'cpp-library-management-system (GitHub)',
+          url: 'https://github.com/jordan-will/cpp-library-management-system',
         },
       },
       {
@@ -162,8 +162,8 @@ export const courses: Course[] = [
           'Historique des transactions.',
         ],
         example: {
-          label: 'Dépôts GitHub — systèmes bancaires',
-          url: 'https://github.com/topics/banking-system',
+          label: 'Banking-management-system — projet OOP en C++ (GitHub)',
+          url: 'https://github.com/umairinayat/Banking-management-system',
         },
       },
       {
@@ -175,8 +175,8 @@ export const courses: Course[] = [
           "Import/export de données.",
         ],
         example: {
-          label: 'Stock-Manager (GitHub)',
-          url: 'https://github.com/MedAziz218/Stock-Manager',
+          label: 'Inventory-Management-System (GitHub)',
+          url: 'https://github.com/emancode-dev/Inventory-Management-System',
         },
       },
       {
@@ -188,8 +188,8 @@ export const courses: Course[] = [
           'Validation des mouvements.',
         ],
         example: {
-          label: 'Dépôts GitHub — moteurs d\u2019échecs (Stockfish, Sunfish…)',
-          url: 'https://github.com/topics/chess-engine',
+          label: 'Patricia — moteur d\u2019échecs en C++ (GitHub)',
+          url: 'https://github.com/Adam-Kulju/Patricia',
         },
       },
       {
@@ -201,8 +201,8 @@ export const courses: Course[] = [
           'Simulation et affichage.',
         ],
         example: {
-          label: 'Dépôts GitHub — simulations de fluides',
-          url: 'https://github.com/topics/fluid-simulation',
+          label: 'ParticleSimulator en C++ (GitHub)',
+          url: 'https://github.com/Syntaf/ParticleSimulator',
         },
       },
     ],
@@ -300,8 +300,8 @@ export const courses: Course[] = [
           'Requêtes et vues SQL.',
         ],
         example: {
-          label: 'Recherche GitHub — schémas de bibliothèque',
-          url: 'https://github.com/search?q=library+database+schema&type=repositories',
+          label: 'Database-Design-and-SQL-Practice (GitHub)',
+          url: 'https://github.com/Kerolos08/Database-Design-and-SQL-Practice',
         },
       },
       {
@@ -313,8 +313,8 @@ export const courses: Course[] = [
           'Transactions et contraintes.',
         ],
         example: {
-          label: 'Chinook — base de données d\u2019exemple complète (magasin multimédia)',
-          url: 'https://github.com/lerocha/chinook-database',
+          label: 'ecommerce-database-design (GitHub)',
+          url: 'https://github.com/jefwakalama/ecommerce-database-design',
         },
       },
       {
@@ -326,8 +326,8 @@ export const courses: Course[] = [
           'Requêtes analytiques.',
         ],
         example: {
-          label: 'Recherche GitHub — schémas d\u2019université',
-          url: 'https://github.com/search?q=university+database+schema&type=repositories',
+          label: 'Inventory-and-Order-Management-System — base de gestion complète (GitHub)',
+          url: 'https://github.com/josephbideri/Inventory-and-Order-Management-System',
         },
       },
       {
@@ -339,8 +339,8 @@ export const courses: Course[] = [
           'Étudier EXPLAIN ANALYZE.',
         ],
         example: {
-          label: 'pgbench — outil officiel de benchmark PostgreSQL',
-          url: 'https://www.postgresql.org/docs/current/pgbench.html',
+          label: 'db-exercise — exercices SQL et optimisation (GitHub)',
+          url: 'https://github.com/vvc-git/db-exercise',
         },
       },
       {
@@ -453,8 +453,8 @@ export const courses: Course[] = [
           'Vérifier les équivalences.',
         ],
         example: {
-          label: 'Générateur de tables de vérité (Stanford CS103)',
-          url: 'https://web.stanford.edu/class/cs103/tools/truth-table-tool/',
+          label: 'Truth-Table — générateur de tables de vérité (GitHub)',
+          url: 'https://github.com/Azizsin7/Truth-Table',
         },
       },
       {
@@ -466,8 +466,8 @@ export const courses: Course[] = [
           'Détecter les erreurs logiques.',
         ],
         example: {
-          label: 'fitch-checker — vérificateur de preuves (Open Logic)',
-          url: 'https://github.com/OpenLogicProject/fitch-checker',
+          label: 'DeDucktion — assistant de preuves interactif (GitHub)',
+          url: 'https://github.com/DeDucktion/DeDucktion',
         },
       },
       {
@@ -505,8 +505,8 @@ export const courses: Course[] = [
           'Comparer avant et après.',
         ],
         example: {
-          label: 'boolean-algebra.com — simplificateur avec étapes détaillées',
-          url: 'https://www.boolean-algebra.com/',
+          label: 'logic_calculator — calculateur logique (GitHub)',
+          url: 'https://github.com/RendieRYU/logic_calculator',
         },
       },
     ],
@@ -605,8 +605,8 @@ export const courses: Course[] = [
           "Déterminer l'acceptation ou le rejet.",
         ],
         example: {
-          label: 'Qfsm — outil graphique de machines à états',
-          url: 'https://qfsm.sourceforge.io/',
+          label: 'automatonSimulator (GitHub)',
+          url: 'https://github.com/kdickerson/automatonSimulator',
         },
       },
       {
@@ -618,8 +618,8 @@ export const courses: Course[] = [
           'Tester des chaînes.',
         ],
         example: {
-          label: 'Regexper — visualiseur d\u2019expressions régulières',
-          url: 'https://regexper.com/',
+          label: 'automata-simulator — visualiseur de DFA/NFA (GitHub)',
+          url: 'https://github.com/YuvalWS/automata-simulator',
         },
       },
       {
@@ -631,8 +631,8 @@ export const courses: Course[] = [
           'Tracer les configurations.',
         ],
         example: {
-          label: 'automata (Python) — automates finis, à pile et machines de Turing',
-          url: 'https://github.com/caleb531/automata',
+          label: 'automata-theory-projects (GitHub)',
+          url: 'https://github.com/06cezar/automata-theory-projects',
         },
       },
       {
@@ -657,8 +657,8 @@ export const courses: Course[] = [
           'Historique des configurations.',
         ],
         example: {
-          label: 'Turing Machine Simulator — utilisé par plusieurs universités',
-          url: 'https://turingmachinesimulator.com/',
+          label: 'Turing-Machine — simulateur de machine de Turing (GitHub)',
+          url: 'https://github.com/Samsu-GG/Turing-Machine',
         },
       },
     ],
@@ -776,8 +776,8 @@ export const courses: Course[] = [
           'Visualiser les changements d\u2019état.',
         ],
         example: {
-          label: 'Compiler Explorer — code C traduit en assembleur ARM64',
-          url: 'https://godbolt.org/',
+          label: 'arm-simulator — simulateur ARM (GitHub)',
+          url: 'https://github.com/alxshine/arm-simulator',
         },
       },
       {
@@ -789,8 +789,8 @@ export const courses: Course[] = [
           'Visualisation des cycles.',
         ],
         example: {
-          label: 'Raven-RiscV — simulateur CPU avec débogueur pas-à-pas',
-          url: 'https://github.com/Gaok1/Raven-RiscV',
+          label: 'gem5 — simulateur d\u2019architecture de référence (GitHub)',
+          url: 'https://github.com/gem5/gem5',
         },
       },
       {
@@ -802,8 +802,8 @@ export const courses: Course[] = [
           'Comparaison des performances.',
         ],
         example: {
-          label: 'Dépôts GitHub — simulateurs de cache',
-          url: 'https://github.com/topics/cache-simulator',
+          label: 'LRU_Cache_Simulator (GitHub)',
+          url: 'https://github.com/pratyay89/LRU_Cache_Simulator',
         },
       },
       {
